@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.notes-list-header {
+    margin-top: 10px;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-list {
+    margin-top: 10px;
+    width: 75%;
+    height: 500px;
+    border: 1px solid black;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.note-element {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: rgba(216, 203, 24, 0.747);
+}
+
+.archive-element {
+    background-color: rgba(119, 81, 10, 0.548);
+}
+
+.note-columns {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.create-note-btn {
+    width: 125px;
+    height: 30px;
+    margin: 10px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal-window {
+    width: 600px;
+    background: white;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.close-btn-placement {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-modal-btn {
+    height: 30px;
+    width: 30px;
+}
+
+button {
+    font-size: 20px;
+    height: 30px;
+}
+
+.note-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+}
+
+.note-content {
+    width: 300px;
+    overflow: auto;
+}
+
+.input-content {
+    height: 100px;
+    width: 450px;
+    margin-bottom: 0px;
+    resize: none;
+    box-sizing: border-box;
+    font-family:sans-serif;
+}
+
+.error-message {
+    background-color: darkred;
+    color: white;
+    margin: 0;
+}
+
+.note-btn {
+    margin-top: 5px;
+}
+
+.note-category, .note-date, .note-dates {
+    width: 100px;
+}
+
+.active-archive-btn {
+    width: 150px;
+}
+
+.category-element {
+    display: flex;
+    margin-bottom: 5px;
+    background-color: cornflowerblue;
+}
+
+.category-name-element, .active-notes-element, .archive-notes-element {
+    width: 200px;
+    text-align: center  ;
+}
+
+
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+}
+
+.table-header {
+    background-color: rgba(165, 42, 42, 0.671);
+}
