@@ -52,7 +52,7 @@ let notes = [
     },
     {
         content: "Тренування в залі 12/1/2022",
-        timeOfCreation: "",
+        timeOfCreation: "2/12/2022",
         isArchivalNote: false,
         category: "Task",
         dates: [
