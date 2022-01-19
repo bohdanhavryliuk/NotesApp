@@ -214,6 +214,7 @@ function addNote(value, category) {
 function editNote(index, value, category) {
   notes[index].content = value;
   notes[index].category = category;
+  notes[index].dates = determinationOfDates(value);
 }
 
 function removeNote(index) {
@@ -524,7 +525,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51887" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64140" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
