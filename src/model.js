@@ -79,6 +79,7 @@ function addNote(value, category) {
 function editNote(index, value, category) {
     notes[index].content = value;
     notes[index].category = category;
+    notes[index].dates = determinationOfDates(value);
 }
 
 function removeNote(index) {
