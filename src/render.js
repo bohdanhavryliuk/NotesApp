@@ -2,7 +2,7 @@ import { addNote, editNote, removeNote, archivingNote, notes, categories, catego
 
 let renderNotesList = fillListElement;
 
-function renderCountElement() {
+function renderCountsElement() {
     const categoriesListElement = document.querySelector("div.categories-list");
     categoriesListElement.innerHTML = `<div class="category-element table-header">
         <h2 class="category-name-element">Note Category</h2>
@@ -78,7 +78,7 @@ function fillListElement() {
             archiveBtn.textContent = "📥";
             deleteBtn.textContent = "🗑";
 
-            editingBtn.onclick = function () {
+            editingBtn.addEventListener("click", function () {
                 modalOverlay();
                 const editInput = document.querySelector("textarea.input-content");
                 editInput.value = notes[index].content;
@@ -86,7 +86,7 @@ function fillListElement() {
                 editSelect.value = notes[index].category;
                 const editBtn = document.querySelector("button.note-btn");
                 editBtn.textContent = "Edit";
-                editBtn.onclick = function () {
+                editBtn.addEventListener("click", function () {
                     try {
                         if (!editInput.value || editInput.value == notes[index].content && editSelect.value == notes[index].category) {
                             throw new SyntaxError("Change error");
@@ -104,18 +104,18 @@ function fillListElement() {
                         }
 
                     }
-                };
-            }
+                });
+            });
 
-            archiveBtn.onclick = function () {
+            archiveBtn.addEventListener("click", function () {
                 archivingNote(index);
                 renderNotesList();
-            }
+            });
 
-            deleteBtn.onclick = function () {
+            deleteBtn.addEventListener("click", function () {
                 removeNote(index);
                 renderNotesList();
-            }
+            });
 
             buttons.append(editingBtn, archiveBtn, deleteBtn);
 
@@ -126,10 +126,10 @@ function fillListElement() {
     });
 
     const archBtn = document.querySelector("button.active-archive-btn");
-    archBtn.onclick = function () {
+    archBtn.addEventListener("click", function () {
         renderNotesList = fillArchivalListElement;
         renderNotesList();
-    }
+    });
 
 }
 
@@ -170,10 +170,10 @@ function fillArchivalListElement() {
 
             archiveBtn.textContent = "📤";
 
-            archiveBtn.onclick = function () {
+            archiveBtn.addEventListener("click", function () {
                 archivingNote(index);
                 renderNotesList();
-            }
+            });
 
             buttons.appendChild(archiveBtn);
 
@@ -182,10 +182,11 @@ function fillArchivalListElement() {
         }
     });
     const archBtn = document.querySelector("button.active-archive-btn");
-    archBtn.onclick = function () {
+
+    archBtn.addEventListener("click", function () {
         renderNotesList = fillListElement;
         renderNotesList();
-    }
+    });
 }
 
 function modalOverlay() {
@@ -206,8 +207,9 @@ function modalOverlay() {
         </div>
     </div>
     `);
+
     const closeBtn = document.querySelector("button.close-modal-btn");
-    closeBtn.onclick = closeModal;
+    closeBtn.addEventListener("click", closeModal);
 }
 
 function closeModal() {
@@ -221,7 +223,7 @@ function addListElement() {
     const addBtn = document.querySelector("button.note-btn");
     const addSelect = document.querySelector("select");
     addBtn.textContent = "Add";
-    addBtn.onclick = function () {
+    addBtn.addEventListener("click", function () {
         try {
             if (!addInput.value) {
                 throw new SyntaxError("The textarea is empty");
@@ -241,7 +243,7 @@ function addListElement() {
                 addInput.insertAdjacentElement('afterend', errorMessage);
             }
         }
-    };
+    });
 }
 
-export { renderNotesList, renderCountElement, addListElement };
+export { renderNotesList, renderCountsElement, addListElement };

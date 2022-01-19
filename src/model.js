@@ -28,7 +28,7 @@ let notes = [
         ]
     },
     {
-        content: "День народження сестри 18/11/2021",
+        content: "День народження друга 18/11/2021",
         timeOfCreation: "1/11/2021",
         isArchivalNote: false,
         category: "Random Thought",

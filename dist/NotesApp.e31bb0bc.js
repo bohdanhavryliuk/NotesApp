@@ -170,7 +170,7 @@ var notes = [{
   category: "Task",
   dates: ["10/10/2021", "17/10/2021"]
 }, {
-  content: "День народження сестри 18/11/2021",
+  content: "День народження друга 18/11/2021",
   timeOfCreation: "1/11/2021",
   isArchivalNote: false,
   category: "Random Thought",
@@ -250,7 +250,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.addListElement = addListElement;
-exports.renderCountElement = renderCountElement;
+exports.renderCountsElement = renderCountsElement;
 exports.renderNotesList = void 0;
 
 var _model = require("./model");
@@ -258,7 +258,7 @@ var _model = require("./model");
 var renderNotesList = fillListElement;
 exports.renderNotesList = renderNotesList;
 
-function renderCountElement() {
+function renderCountsElement() {
   var categoriesListElement = document.querySelector("div.categories-list");
   categoriesListElement.innerHTML = "<div class=\"category-element table-header\">\n        <h2 class=\"category-name-element\">Note Category</h2>\n        <h2 class=\"active-notes-element\">Active</h2>\n        <h2 class=\"archive-notes-element\">Archived</h2>\n    </div>";
   (0, _model.categoriesNotesCount)().forEach(function (categoryCounts) {
@@ -315,8 +315,7 @@ function fillListElement() {
       editingBtn.textContent = "🖉";
       archiveBtn.textContent = "📥";
       deleteBtn.textContent = "🗑";
-
-      editingBtn.onclick = function () {
+      editingBtn.addEventListener("click", function () {
         modalOverlay();
         var editInput = document.querySelector("textarea.input-content");
         editInput.value = _model.notes[index].content;
@@ -324,8 +323,7 @@ function fillListElement() {
         editSelect.value = _model.notes[index].category;
         var editBtn = document.querySelector("button.note-btn");
         editBtn.textContent = "Edit";
-
-        editBtn.onclick = function () {
+        editBtn.addEventListener("click", function () {
           try {
             if (!editInput.value || editInput.value == _model.notes[index].content && editSelect.value == _model.notes[index].category) {
               throw new SyntaxError("Change error");
@@ -342,19 +340,16 @@ function fillListElement() {
               editInput.insertAdjacentElement('afterend', errorMessage);
             }
           }
-        };
-      };
-
-      archiveBtn.onclick = function () {
+        });
+      });
+      archiveBtn.addEventListener("click", function () {
         (0, _model.archivingNote)(index);
         renderNotesList();
-      };
-
-      deleteBtn.onclick = function () {
+      });
+      deleteBtn.addEventListener("click", function () {
         (0, _model.removeNote)(index);
         renderNotesList();
-      };
-
+      });
       buttons.append(editingBtn, archiveBtn, deleteBtn);
       itemElement.append(contentElement, categoryElement, dateElement, datesElement, buttons);
       notesListElement.appendChild(itemElement);
@@ -362,11 +357,10 @@ function fillListElement() {
   });
 
   var archBtn = document.querySelector("button.active-archive-btn");
-
-  archBtn.onclick = function () {
+  archBtn.addEventListener("click", function () {
     exports.renderNotesList = renderNotesList = fillArchivalListElement;
     renderNotesList();
-  };
+  });
 }
 
 function fillArchivalListElement() {
@@ -393,12 +387,10 @@ function fillArchivalListElement() {
       var archiveBtn = document.createElement("button");
       archiveBtn.className = "activate-note";
       archiveBtn.textContent = "📤";
-
-      archiveBtn.onclick = function () {
+      archiveBtn.addEventListener("click", function () {
         (0, _model.archivingNote)(index);
         renderNotesList();
-      };
-
+      });
       buttons.appendChild(archiveBtn);
       itemElement.append(contentElement, categoryElement, dateElement, buttons);
       notesListElement.appendChild(itemElement);
@@ -406,11 +398,10 @@ function fillArchivalListElement() {
   });
 
   var archBtn = document.querySelector("button.active-archive-btn");
-
-  archBtn.onclick = function () {
+  archBtn.addEventListener("click", function () {
     exports.renderNotesList = renderNotesList = fillListElement;
     renderNotesList();
-  };
+  });
 }
 
 function modalOverlay() {
@@ -422,7 +413,7 @@ function modalOverlay() {
 
   document.getElementById("root").insertAdjacentHTML("beforeend", "\n    <div class=\"modal-overlay\">\n        <div class=\"modal-window\">\n            <div class=\"close-btn-placement\">\n                <button class=\"close-modal-btn\">&#10006;</button>\n            </div>\n            <textarea class=\"input-content\"></textarea>\n            <select>".concat(selectOptions, "</select>\n            <button class=\"note-btn\"></button>\n        </div>\n    </div>\n    "));
   var closeBtn = document.querySelector("button.close-modal-btn");
-  closeBtn.onclick = closeModal;
+  closeBtn.addEventListener("click", closeModal);
 }
 
 function closeModal() {
@@ -435,8 +426,7 @@ function addListElement() {
   var addBtn = document.querySelector("button.note-btn");
   var addSelect = document.querySelector("select");
   addBtn.textContent = "Add";
-
-  addBtn.onclick = function () {
+  addBtn.addEventListener("click", function () {
     try {
       if (!addInput.value) {
         throw new SyntaxError("The textarea is empty");
@@ -454,7 +444,7 @@ function addListElement() {
         addInput.insertAdjacentElement('afterend', errorMessage);
       }
     }
-  };
+  });
 }
 },{"./model":"src/model.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
@@ -480,11 +470,11 @@ var App = /*#__PURE__*/function () {
   _createClass(App, null, [{
     key: "startApp",
     value: function startApp() {
-      var btn = document.querySelector("button.create-note-btn");
-      btn.onclick = _render.addListElement;
+      var createNoteBtn = document.querySelector("button.create-note-btn");
+      createNoteBtn.addEventListener("click", _render.addListElement);
       (0, _render.renderNotesList)();
-      (0, _render.renderCountElement)();
-      var observer = new MutationObserver(_render.renderCountElement);
+      (0, _render.renderCountsElement)();
+      var observer = new MutationObserver(_render.renderCountsElement);
       observer.observe(document.querySelector("div.notes-list"), {
         attributes: true,
         childList: true,
@@ -534,7 +524,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62743" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51887" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
