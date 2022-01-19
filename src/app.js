@@ -1,16 +1,16 @@
-import { renderNotesList, renderCountElement, addListElement } from "./render";
+import { renderNotesList, renderCountsElement, addListElement } from "./render";
 
 class App {
     static startApp() {
-        const btn = document.querySelector("button.create-note-btn");
+        const createNoteBtn = document.querySelector("button.create-note-btn");
 
-        btn.onclick = addListElement;
+        createNoteBtn.addEventListener("click", addListElement);
 
         renderNotesList();
 
-        renderCountElement();
+        renderCountsElement();
 
-        const observer = new MutationObserver(renderCountElement);
+        const observer = new MutationObserver(renderCountsElement);
 
         observer.observe(document.querySelector("div.notes-list"), {
             attributes: true,
